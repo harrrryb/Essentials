@@ -349,19 +349,24 @@ public class EssentialsConf extends YamlConfiguration
 
 					if (!configFile.exists())
 					{
-						try
+						for (int x = 1; x <= 3; x++)
 						{
-							LOGGER.log(Level.INFO, _("creatingEmptyConfig", configFile.toString()));
-							if (!configFile.createNewFile())
+							try
 							{
-								LOGGER.log(Level.SEVERE, _("failedToCreateConfig", configFile.toString()));
-								return;
+								LOGGER.log(Level.INFO, _("creatingEmptyConfig", configFile.toString()));
+								if (!configFile.createNewFile())
+								{
+									LOGGER.log(Level.SEVERE, _("failedToCreateConfig", configFile.toString()));
+									return;
+								}
+								break;
 							}
-						}
-						catch (IOException ex)
-						{
-							LOGGER.log(Level.SEVERE, _("failedToCreateConfig", configFile.toString()), ex);
-							return;
+							catch (IOException ex)
+							{
+								if (x == 3) {
+									LOGGER.log(Level.SEVERE, _("failedToCreateConfig", configFile.toString()), ex);								
+								}
+							}							
 						}
 					}
 
