@@ -13,6 +13,7 @@ groups:
     default: true
     permissions:
     - -bukkit.command.kill
+    - - -essentials.warp
     inheritance:
     - g:groupmanager_default
     - g:bukkit_default
